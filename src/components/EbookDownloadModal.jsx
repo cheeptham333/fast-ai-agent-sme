@@ -7,10 +7,11 @@ import {
   Check, 
   Sparkles, 
   BookOpen, 
-  ExternalLink,
-  ShieldCheck,
-  Zap,
-  Award
+  ExternalLink, 
+  ShieldCheck, 
+  Zap, 
+  Award,
+  Eye
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -19,19 +20,12 @@ export function EbookDownloadModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const handleDownloadPdf = () => {
+  const handleConfetti = () => {
     confetti({
       particleCount: 70,
       spread: 60,
       origin: { y: 0.6 }
     });
-    // Trigger download
-    const link = document.createElement('a');
-    link.href = '/fast-ai-handbook-sme-2026.pdf';
-    link.download = 'Fast_AI_Master_Handbook_SME_2026_OReilly_Edition.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
 
   const handlePrint = () => {
@@ -39,7 +33,7 @@ export function EbookDownloadModal({ isOpen, onClose }) {
   };
 
   const handleCopyMarkdown = () => {
-    fetch('/FAST_AI_HANDBOOK_COMPLETE_GUIDE.md')
+    fetch('./FAST_AI_HANDBOOK_COMPLETE_GUIDE.md')
       .then(res => res.text())
       .then(text => {
         navigator.clipboard.writeText(text);
@@ -71,7 +65,7 @@ export function EbookDownloadModal({ isOpen, onClose }) {
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                คู่มือปฏิบัติการ AI Agent & Vibe Coding สำหรับผู้ประกอบการ SME (ฉบับสมบูรณ์ 45 หน้า)
+                คู่มือปฏิบัติการ AI Agent &amp; Vibe Coding สำหรับผู้ประกอบการ SME (ฉบับสมบูรณ์ 45 หน้า)
               </p>
             </div>
           </div>
@@ -90,7 +84,7 @@ export function EbookDownloadModal({ isOpen, onClose }) {
           <div className="p-5 rounded-2xl bg-gradient-to-br from-slate-50 via-white to-brand-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-800 flex items-center gap-4 shadow-sm">
             <div className="w-20 h-28 rounded-xl bg-white border border-slate-300 shadow-md flex-shrink-0 overflow-hidden flex items-center justify-center">
               <img 
-                src="/ebook_cover_preview.png" 
+                src="./ebook_cover_preview.png" 
                 alt="Fast AI O'Reilly Cover" 
                 className="w-full h-full object-cover"
               />
@@ -100,13 +94,13 @@ export function EbookDownloadModal({ isOpen, onClose }) {
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300">
                   45 Pages Master Edition
                 </span>
-                <span className="text-xs text-slate-500 dark:text-slate-400">A4 Portrait • High-Res PDF (864 KB)</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">A4 Portrait • High-Res PDF (890 KB)</span>
               </div>
               <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">
-                AI Agent & Vibe Coding for SME Handbook
+                AI Agent &amp; Vibe Coding for SME Handbook
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                จัดหน้าคู่มือระดับสากลสไตล์ O'Reilly พร้อมสารบัญ 6 ภาควิชาการ, 18 บทเรียนเจาะลึก, 5 พิมพ์เขียวพร้อมโค้ดเต็ม, คลัง Prompt 30+ ชุด, และ 30-Day Action Plan
+                จัดหน้าคู่มือระดับสากลสไตล์ O'Reilly พร้อมสารบัญ 6 ภาควิชาการ, 18 บทเรียนเจาะลึก, 5 พิมพ์เขียวพร้อมโค้ดเต็ม, คลัง Prompt 30+ ชุด, และ 30-Day Action Plan โดย <strong>ชีพธรรม คำวิเศษณ์</strong>
               </p>
             </div>
           </div>
@@ -114,38 +108,55 @@ export function EbookDownloadModal({ isOpen, onClose }) {
           {/* Download Options */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              ตัวเลือกการดาวน์โหลดและพิมพ์:
+              ตัวเลือกการดาวน์โหลดและเปิดอ่าน:
             </h4>
 
-            {/* Option 1: Direct PDF */}
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 hover:border-brand-500/50 transition-all">
+            {/* Option 1: Direct PDF Download & View */}
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-brand-500/50 transition-all">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400">
+                <div className="p-2.5 rounded-xl bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400 flex-shrink-0">
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
-                    ดาวน์โหลดไฟล์ E-Book O'Reilly Edition (PDF)
+                    ดาวน์โหลดไฟล์ E-Book O'Reilly Edition (PDF 45 หน้า)
                   </div>
                   <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                    ไฟล์ PDF ฉบับเต็ม 45 หน้า คมชัดสมบูรณ์แบบ สำหรับเปิดอ่านบน iPad หรือพิมพ์แจก
+                    ไฟล์ PDF ฉบับสมบูรณ์ คมชัดสูง สำหรับเปิดอ่านบน iPad หรือพิมพ์แจก
                   </div>
                 </div>
               </div>
 
-              <button
-                onClick={handleDownloadPdf}
-                className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white shadow-sm transition-all flex-shrink-0"
-              >
-                <Download className="w-4 h-4" />
-                <span>ดาวน์โหลด PDF</span>
-              </button>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                {/* Direct Download Button */}
+                <a
+                  href="./fast-ai-handbook-sme-2026.pdf"
+                  download="Fast_AI_Master_Handbook_SME_2026_OReilly_Edition.pdf"
+                  onClick={handleConfetti}
+                  className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white shadow-sm transition-all text-center"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>ดาวน์โหลด PDF</span>
+                </a>
+
+                {/* Open in Browser Tab Button */}
+                <a
+                  href="./fast-ai-handbook-sme-2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-3 py-2.5 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition-all"
+                  title="เปิดอ่านบนเบราว์เซอร์ทันที"
+                >
+                  <Eye className="w-4 h-4" />
+                  <span className="hidden sm:inline">เปิดอ่าน</span>
+                </a>
+              </div>
             </div>
 
             {/* Option 2: Print to PDF */}
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 hover:border-brand-500/50 transition-all">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400">
+                <div className="p-2.5 rounded-xl bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 flex-shrink-0">
                   <Printer className="w-5 h-5" />
                 </div>
                 <div>
@@ -170,7 +181,7 @@ export function EbookDownloadModal({ isOpen, onClose }) {
             {/* Option 3: Markdown */}
             <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 hover:border-brand-500/50 transition-all">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400">
+                <div className="p-2.5 rounded-xl bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400 flex-shrink-0">
                   <Zap className="w-5 h-5" />
                 </div>
                 <div>
@@ -196,7 +207,7 @@ export function EbookDownloadModal({ isOpen, onClose }) {
 
           <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-500/20 flex items-center gap-2 text-xs text-emerald-800 dark:text-emerald-300">
             <ShieldCheck className="w-4 h-4 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
-            <span>Fast AI Mastery 2026 — O'Reilly Style Certified Master Handbook (45 Pages)</span>
+            <span>Fast AI Mastery 2026 — O'Reilly Style Certified Master Handbook (45 Pages) โดย ชีพธรรม คำวิเศษณ์</span>
           </div>
 
         </div>
