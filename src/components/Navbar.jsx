@@ -36,7 +36,7 @@ export function Navbar({
             <a href="/" className="flex items-center gap-2.5 group">
               <div className="h-10 px-2.5 py-1 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center shadow-xs">
                 <img 
-                  src="/fast-ai-logo.png" 
+                  src="./fast-ai-logo.png" 
                   alt="Fast AI Logo" 
                   className="h-7 w-auto object-contain"
                 />
