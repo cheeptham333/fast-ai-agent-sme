@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Fast AI: AI Agent & Vibe Coding Handbook สำหรับ SME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+      content: counter(page);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9pt;
+      color: #64748b;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.65;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Prompt', 'Plus Jakarta Sans', sans-serif;
+    color: #0f172a;
+    font-weight: 700;
+    margin-top: 1.4em;
+    margin-bottom: 0.5em;
+    page-break-after: avoid;
+  }
+
+  h1 { font-size: 20pt; border-bottom: 2px solid #dc2626; padding-bottom: 6px; color: #0b1b3d; }
+  h2 { font-size: 14pt; color: #0284c7; border-left: 4px solid #0284c7; padding-left: 8px; margin-top: 1.2em; }
+  h3 { font-size: 11pt; color: #1e293b; font-weight: 600; }
+
+  p, li {
+    font-size: 9.5pt;
+    color: #334155;
+    text-align: justify;
+  }
+
+  ul, ol {
+    margin: 0.5em 0;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+
+  /* O'REILLY STYLE COVER */
+  .oreilly-cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 3px solid #0b1b3d;
+    padding: 30px;
+    background: #ffffff;
+    position: relative;
+  }
+
+  .oreilly-top-bar {
+    border-bottom: 5px solid #dc2626;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .oreilly-logo {
+    height: 45px;
+  }
+
+  .oreilly-series {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11pt;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #0b1b3d;
+    text-transform: uppercase;
+  }
+
+  .oreilly-illustration-box {
+    margin: 30px auto;
+    width: 260px;
+    height: 260px;
+    border: 2px solid #cbd5e1;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .oreilly-woodcut-icon {
+    font-size: 65pt;
+    margin-bottom: 10px;
+  }
+
+  .oreilly-title-block {
+    margin-top: 15px;
+    border-top: 2px solid #0b1b3d;
+    padding-top: 20px;
+  }
+
+  .oreilly-main-title {
+    font-size: 26pt;
+    font-weight: 800;
+    color: #0b1b3d;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .oreilly-subtitle {
+    font-size: 13pt;
+    color: #dc2626;
+    font-weight: 600;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+
+  .oreilly-author {
+    margin-top: 25px;
+    font-size: 11pt;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  /* CALLOUT BOXES */
+  .callout {
+    margin: 12px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  .callout-tip {
+    background-color: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    color: #166534;
+  }
+
+  .callout-warning {
+    background-color: #fef2f2;
+    border-left: 4px solid #dc2626;
+    color: #991b1b;
+  }
+
+  .callout-info {
+    background-color: #f0f9ff;
+    border-left: 4px solid #0284c7;
+    color: #075985;
+  }
+
+  .callout-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* CODE BLOCKS */
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    padding: 12px 14px;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    margin: 10px 0;
+    border: 1px solid #334155;
+    page-break-inside: avoid;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 8.5pt;
+    border: 1px solid #e2e8f0;
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    background-color: #0b1b3d;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid #0b1b3d;
+  }
+
+  td {
+    padding: 7px 10px;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+
+  /* TOC */
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    border-bottom: 1px dotted #cbd5e1;
+    padding-bottom: 3px;
+    font-size: 9.5pt;
+  }
+  .toc-title { font-weight: 600; color: #0b1b3d; }
+  .toc-page { font-weight: 700; color: #dc2626; }
+
+  .header-tag {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #dc2626;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div class="oreilly-cover">
+  <div class="oreilly-top-bar">
+    <div class="oreilly-series">O'REILLY & FAST AI CO-SERIES</div>
+    <img src="file:///Users/tri333/Documents/Ebook AI Agent FastAI/public/fast-ai-logo.png" alt="Fast AI" class="oreilly-logo">
+  </div>
+
+  <div class="oreilly-illustration-box">
+    <div class="oreilly-woodcut-icon">🦅⚡</div>
+    <div style="font-size: 11pt; font-weight: 700; color: #0b1b3d; margin-top: 5px;">The Agile Autonomous Falcon</div>
+    <div style="font-size: 8pt; color: #64748b; margin-top: 4px;">สัญลักษณ์แห่งความเร็วและความแม่นยำในการสร้างระบบธุรกิจ</div>
+  </div>
+
+  <div class="oreilly-title-block">
+    <h1 class="oreilly-main-title">AI Agent & Vibe Coding<br>for SME Handbook</h1>
+    <div class="oreilly-subtitle">คู่มือปฏิบัติการสร้างเว็บ ระบบอัตโนมัติ และแอปพลิเคชันธุรกิจด้วย Google Antigravity & ChatGPT Codex</div>
+    <div class="oreilly-author">
+      โดย <strong>ทีมวิชาการและโค้ชชิ่ง Fast AI Thailand</strong><br>
+      <span style="font-size: 8.5pt; color: #64748b;">คู่มือฉบับสมบูรณ์สำหรับผู้ประกอบการ SME และผู้บริหาร (Non-Programmers) • ฉบับพิมพ์ครั้งที่ 1 (2026)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE BREAK: TOC ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">TABLE OF CONTENTS</div>
+<h1>สารบัญเล่มคู่มือ (Handbook Overview)</h1>
+
+<div style="margin-top: 20px;">
+  <div class="toc-item"><span class="toc-title">บทนำ: บริบท AI ประเทศไทย 2026 และ Mindset Vibe Coding</span><span class="toc-page">บทที่ 1</span></div>
+  <div class="toc-item"><span class="toc-title">The Modern AI Stack 2026: ชุดเครื่องมือประจำตัวผู้บริหาร</span><span class="toc-page">บทที่ 2</span></div>
+  <div class="toc-item"><span class="toc-title">เจาะลึก Google Antigravity 2.0: สุดยอด Agentic Coding Engine</span><span class="toc-page">บทที่ 3</span></div>
+  <div class="toc-item"><span class="toc-title">Google Gemini Notebook (NotebookLM): ศูนย์รวมสมองที่ 2 ปลอดข้อมูลมั่ว</span><span class="toc-page">บทที่ 4</span></div>
+  <div class="toc-item"><span class="toc-title">ChatGPT Codex & Canvas: ปรับแต่ง Visual แบบเรียลไทม์</span><span class="toc-page">บทที่ 5</span></div>
+  <div class="toc-item"><span class="toc-title">5 พิมพ์เขียวโปรเจกต์จริง SME (Blueprints & Source Code)</span><span class="toc-page">บทที่ 6</span></div>
+  <div style="padding-left: 15px; margin-bottom: 6px; font-size: 8.5pt; color: #64748b;">
+    • 6.1 บอทส่องราคาคู่แข่งอัตโนมัติ (Competitor Price Scraper) + LINE Notify<br>
+    • 6.2 AI 24/7 Sales Rep & Customer Support (บอทปิดการขาย + Sheets CRM)<br>
+    • 6.3 ระบบบริหารสต็อกและแจ้งเตือน Reorder Point (Smart Inventory)<br>
+    • 6.4 ระบบสร้างคอนเทนต์และสคริปต์วิดีโอสั้น (Multi-Platform Content Generator)<br>
+    • 6.5 Executive Financial & Profit Dashboard (ระบบวิเคราะห์การเงินผู้บริหาร)
+  </div>
+  <div class="toc-item"><span class="toc-title">เทคนิคระดับว้าว: Computer Use & Mobile Coding 100% ผ่านสมาร์ทโฟน</span><span class="toc-page">บทที่ 7</span></div>
+  <div class="toc-item"><span class="toc-title">ทำเนียบ Plugins, Custom Skills (SKILL.md) & Quota Zero-Cost Guide</span><span class="toc-page">บทที่ 8</span></div>
+  <div class="toc-item"><span class="toc-title">ขั้นตอน Deploy ขึ้น Production จริง 0 บาท & กฎหมายความปลอดภัย PDPA</span><span class="toc-page">บทที่ 9</span></div>
+  <div class="toc-item"><span class="toc-title">ภาคผนวก A: คลังคำสั่งลับ Slash Commands & สูตรลัด Prompt</span><span class="toc-page">ภาคผนวก A</span></div>
+  <div class="toc-item"><span class="toc-title">ภาคผนวก B: แผนปฏิบัติการ 30 วันสำหรับองค์กร (30-Day Action Plan)</span><span class="toc-page">ภาคผนวก B</span></div>
+</div>
+
+<div class="callout callout-info" style="margin-top: 30px;">
+  <div class="callout-title">💡 พันธกิจของคู่มือเล่มนี้ (Our Mission)</div>
+  เปลี่ยนผู้ประกอบการ SME ไทยอายุ 30 ปีขึ้นไปที่ไม่มีพื้นฐานการเขียนโปรแกรม ให้สามารถเปลี่ยนไอเดียธุรกิจเป็นซอฟต์แวร์ที่ใช้งานได้จริงในองค์กรภายใน 1 วัน เพิ่มรายได้ ลดต้นทุน และขยายโอกาสทางธุรกิจอย่างยั่งยืน
+</div>
+
+<!-- ==================== CHAPTER 1 ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">CHAPTER 1</div>
+<h1>บทที่ 1: บริบท AI ประเทศไทย 2026 & Mindset Vibe Coding</h1>
+
+<h2>1.1 สถานการณ์ AI ในภาคธุรกิจ SME ไทย (ข้อมูลวิจัย 2026)</h2>
+<p>
+ในยุคปัจจุบัน ปัญญาประดิษฐ์ (AI) ไม่ใช่เพียงเรื่องของการทดลองในห้องแล็บหรือเทคโนโลยีของบริษัทเทคยักษ์ใหญ่อีกต่อไป แต่ได้กลายมาเป็น <strong>"โครงสร้างพื้นฐานสำคัญในการดำเนินธุรกิจ"</strong> ของผู้ประกอบการ SME ไทย
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>แหล่งข้อมูล / งานวิจัย</th>
+      <th>สถิติสำคัญที่พบ</th>
+      <th>ผลกระทบต่อธุรกิจ SME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>AWS Report 2026</strong><br>Unlocking Thailand's AI Potential</td>
+      <td><strong>84%</strong> ของ SME ที่ใช้ AI รายงานว่าประสิทธิภาพการทำงานเพิ่มขึ้น<br><strong>71%</strong> มีรายได้เติบโตเฉลี่ย <strong>19%</strong> ในปีแรก</td>
+      <td>ธุรกิจที่ใช้ AI สามารถประหยัดเวลาแอดมิน 15-20 ชม./สัปดาห์ และตอบสนองลูกค้าได้ไวกว่าเดิม 10 เท่า</td>
+    </tr>
+    <tr>
+      <td><strong>UOB Business Outlook 2026</strong><br>สำรวจผู้บริหาร 265 ราย</td>
+      <td>ผู้ประกอบการไทยกว่า <strong>70%</strong> นำ AI เข้าสู่กระบวนการทำงานแล้ว (สูงกว่าค่าเฉลี่ยอาเซียน)</td>
+      <td>เกิดช่องว่างการแข่งขัน (Productivity Gap) ระหว่างธุรกิจที่ใช้ AI กับธุรกิจที่ยังทำงานแบบดั้งเดิม</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>1.2 ปรัชญา 'Vibe Coding' คืออะไร?</h2>
+<p>
+คำว่า <strong>Vibe Coding</strong> ได้รับการบัญญัติโดย <em>Andrej Karpathy</em> (อดีต Director of AI ของ Tesla และผู้ร่วมก่อตั้ง OpenAI) เพื่ออธิบายถึงกระบวนการสร้างซอฟต์แวร์ที่คุณ <strong>"ไม่ต้องนั่งจำ Syntax หรือเขียนโค้ดทีละบรรทัดอีกต่อไป"</strong> แต่ใช้การ <strong>"พูดคุย ชี้นำ และสั่งงาน AI ด้วยภาษาธุรกิจ (Natural Business Language)"</strong>
+</p>
+
+<div class="callout callout-tip">
+  <div class="callout-title">🎯 กฎทอง 80/20 ในการสั่ง AI Agent สำหรับผู้บริหาร</div>
+  <ul>
+    <li><strong>ความสำเร็จ 80%</strong> มาจาก <em>"การตั้งโจทย์ธุรกิจและบรีฟงานที่คมชัด"</em> (ระบุบริบท, กลุ่มลูกค้า, กฎเกณฑ์, และผลลัพธ์ที่ต้องการ)</li>
+    <li><strong>อีก 20%</strong> คือ <em>"การตรวจรับงานและวนปรับแก้ (Iterative Review)"</em> เหมือนผู้จัดการตรวจงานลูกน้อง</li>
+    <li><strong>ข้อเท็จจริงสำคัญ:</strong> Prompt แรกที่คุณป้อนจะได้ผลลัพธ์ประมาณ 40-60% เสมอ! หัวใจของ Vibe Coding คือการปรับแก้ทีละจุด (Feedback Loop) ไม่ใช่การพิมพ์คำสั่งวิเศษครั้งเดียวแล้วจบ</li>
+  </ul>
+</div>
+
+<!-- ==================== CHAPTER 2 ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">CHAPTER 2</div>
+<h1>บทที่ 2: The Modern AI Stack 2026</h1>
+
+<p>
+เพื่อความคุ้มค่าสูงสุดสำหรับ SME เราคัดสรรเฉพาะเครื่องมือระดับโลกที่มี <strong>Free Tier</strong> คุณภาพสูง ให้คุณสร้างระบบได้ด้วยงบประมาณ 0 บาท:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>เครื่องมือ (Tool)</th>
+      <th>บทบาทในองค์กร</th>
+      <th>จุดเด่นสำคัญ</th>
+      <th>ค่าใช้จ่าย</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Google Antigravity 2.0</strong></td>
+      <td>Autonomous Coding Engine</td>
+      <td>สั่งสร้างทั้งระบบข้ามไฟล์ด้วย <code>/goal</code>, ตั้งเวลาทำงานด้วย <code>/schedule</code></td>
+      <td>ฟรี / มีโควตา Free Tier สูง</td>
+    </tr>
+    <tr>
+      <td><strong>Google NotebookLM</strong></td>
+      <td>Second Brain ประจำบริษัท</td>
+      <td>คลังความรู้ปลอดข้อมูลมั่ว 100% (Source-Grounded) + Audio Podcast</td>
+      <td><strong>ฟรี 100%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>ChatGPT Codex / Canvas</strong></td>
+      <td>Visual Code Copilot</td>
+      <td>ปรับแต่ง UI แบบเรียลไทม์ และแกะหน้าเว็บจากภาพสเก็ตช์</td>
+      <td>ฟรี (GPT-4o) / Plus $20</td>
+    </tr>
+    <tr>
+      <td><strong>Claude 3.7 & Computer Use</strong></td>
+      <td>Mouse & Keyboard Agent</td>
+      <td>สั่งให้ AI มองหน้าจอ เลื่อนเมาส์ กรอกฟอร์มภาษี โหลดสลิปบัญชี</td>
+      <td>Free / Pro $20</td>
+    </tr>
+    <tr>
+      <td><strong>GitHub + Vercel</strong></td>
+      <td>Cloud Hosting & Deployment</td>
+      <td>ตู้เซฟเก็บโค้ด และเซิร์ฟเวอร์ปล่อยเว็บออกสู่อินเทอร์เน็ตทั่วโลกใน 2 นาที</td>
+      <td><strong>ฟรี 100%</strong> (Hobby Tier)</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ==================== CHAPTER 3 ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">CHAPTER 3</div>
+<h1>บทที่ 3: เจาะลึก Google Antigravity 2.0</h1>
+
+<h2>3.1 ทำความรู้จัก Google Antigravity</h2>
+<p>
+Google Antigravity คือระบบ Agentic AI Coding ที่ออกแบบมาเพื่อการทำงานระดับ Autonomous (ลงมือทำเองข้ามไฟล์ จัดการ Terminal รันคำสั่ง และแก้ไขตัวเองอัตโนมัติ) ไม่ใช่แค่แชทบอทตอบคำถาม
+</p>
+
+<h2>3.2 Slash Commands สำคัญที่ต้องใช้เป็น</h2>
+<ul>
+  <li><code>/goal [คำสั่งงาน]</code> — สั่งให้ Agent รันงานแบบ Deep Execution ข้ามคืนจนกว่าระบบจะเสร็จสมบูรณ์ 100%</li>
+  <li><code>/schedule</code> — ตั้งเวลาให้บอทตื่นมาทำงานอัตโนมัติ (เช่น สรุปยอดขายทุก 8.00 น. หรือเช็คราคาคู่แข่งทุก 2 ชั่วโมง)</li>
+  <li><code>/browser</code> — สั่งให้ Agent เปิดเบราว์เซอร์ไปท่องเว็บ ส่องราคาคู่แข่ง หรือดาวน์โหลดรูปภาพ</li>
+  <li><code>/grill-me</code> — สั่งให้ AI สัมภาษณ์เราทีละคำถามเพื่อตกผลึก Requirement ทางธุรกิจก่อนเริ่มเขียนโค้ด</li>
+  <li><code>/learn</code> — สอนและบันทึกความชอบหรือข้อบังคับของบริษัทลงในความจำถาวรของ Agent</li>
+  <li><code>/teamwork-preview</code> — กระจายงานให้ Agent หลายตัวทำงานคู่ขนานกัน (Subagents)</li>
+</ul>
+
+<div class="callout callout-tip">
+  <div class="callout-title">⚡ ตัวอย่าง Prompt สั่งงานสร้างระบบด้วย /goal</div>
+  <pre>/goal ช่วยสร้างเว็บแอปพลิเคชันบริหารสต็อกสินค้าสำหรับธุรกิจค้าส่ง มีฟังก์ชัน:
+1. เพิ่ม/ลด/แก้ไขสินค้า
+2. แจ้งเตือนเมื่อสินค้าต่ำกว่าจุดสั่งซื้อซ้ำ (Reorder point)
+3. Dashboard สรุปมูลค่าสินค้าคงคลังรวม
+4. ออกแบบ UI สไตล์ Modern Light Mode สวยงามและรองรับมือถือ 100%</pre>
+</div>
+
+<!-- ==================== CHAPTER 4 ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">CHAPTER 4</div>
+<h1>บทที่ 4: Google Gemini Notebook (NotebookLM) — Second Brain</h1>
+
+<h2>4.1 ศูนย์รวมสมองที่ 2 ปลอดข้อมูลมั่ว 100%</h2>
+<p>
+Google NotebookLM ทำงานบนสถาปัตยกรรม <strong>Source-Grounded AI</strong> หมายความว่า AI จะตอบคำถามโดยอ้างอิงจาก <em>"เอกสารที่คุณอัปโหลดเข้าไปเท่านั้น"</em> (PDF คู่มือบริษัท, แคตตาล็อก, สัญญา, SOP) ทำให้ไม่มีอาการมั่วข้อมูล (Zero Hallucination) 100% พร้อมชี้หน้าและบรรทัดที่มาของข้อมูลเสมอ
+</p>
+
+<h2>4.2 3 พลังวิเศษของ NotebookLM สำหรับเจ้าของธุรกิจ</h2>
+<ol>
+  <li><strong>แปลง SOP บริษัทเป็นระบบอัตโนมัติ:</strong> โยนคู่มือระเบียบการทำงานเข้าไป แล้วสั่งให้สรุปเป็น Requirement ชัดเจน</li>
+  <li><strong>Audio Overview (Deep Dive Podcast):</strong> กดคลิกเดียว แปลงเอกสารหนา 50 หน้าให้กลายเป็น <strong>รายการพอดแคสต์เสียงจำลองภาษาไทย/อังกฤษ</strong> มีผู้ดำเนินรายการ 2 คนมาคุยสรุปประเด็นให้ฟังขณะขับรถ</li>
+  <li><strong>สะพานเชื่อมสู่ AI Agent:</strong> ดึงโครงสร้างตรรกะจาก NotebookLM ส่งต่อให้ Antigravity เขียนโปรแกรมได้แม่นยำตรงตามกฎบริษัท</li>
+</ol>
+
+<div class="callout callout-info">
+  <div class="callout-title">🔗 คลังความรู้ Fast AI Official Workspace</div>
+  ผู้เรียนสามารถเข้าสู่คลังความรู้หลักสูตร Fast AI บน NotebookLM ได้ที่:<br>
+  <strong>https://notebook.google.com/notebook/be661c24-57d5-4208-ba66-73e9aff3cca8</strong>
+</div>
+
+<!-- ==================== CHAPTER 5 ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">CHAPTER 5</div>
+<h1>บทที่ 5: 5 พิมพ์เขียวโปรเจกต์จริง SME (Blueprints & Code)</h1>
+
+<h2>5.1 โปรเจกต์ที่ 1: บอทส่องราคาคู่แข่ง (Competitor Price Scraper) + LINE Notify</h2>
+<p><strong>ผลลัพธ์ธุรกิจ (ROI):</strong> ประหยัดเวลาเช็คราคา 20 ชม./สัปดาห์ + ปรับราคาสู้ได้เร็วกว่าเดิม 3 เท่า</p>
+<pre>// competitor_scraper.js
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+const LINE_TOKEN = process.env.LINE_NOTIFY_TOKEN;
+const TARGET_PRODUCTS = [
+  { name: 'สินค้า A คู่แข่ง', url: 'https://example.com/p1', myPrice: 450 }
+];
+
+async function checkPrices() {
+  let msg = "\n📊 สรุปราคาสินค้าคู่แข่งประจำวัน:\n";
+  for (const item of TARGET_PRODUCTS) {
+    const { data } = await axios.get(item.url);
+    const $ = cheerio.load(data);
+    const currentPrice = parseInt($('.price-tag').text().replace(/[^0-9]/g, '')) || 0;
+    const diff = item.myPrice - currentPrice;
+    const status = diff > 0 ? `🔴 เราแพงกว่า ${diff}บ.` : `🟢 เราถูกกว่า ${Math.abs(diff)}บ.`;
+    msg += `\n- ${item.name}: ${currentPrice} บาท (${status})`;
+  }
+  await axios.post('https://notify-api.line.me/api/notify', `message=${encodeURIComponent(msg)}`, {
+    headers: { 'Authorization': `Bearer ${LINE_TOKEN}`, 'Content-Type': 'application/x-www-form-urlencoded' }
+  });
+}
+checkPrices();</pre>
+
+<h2>5.2 โปรเจกต์ที่ 2: 24/7 AI Sales Rep & CRM Sheets Sync</h2>
+<p><strong>ผลลัพธ์ธุรกิจ (ROI):</strong> กู้คืนยอดขายช่วงดึกได้ +35% และตอบแชทลูกค้าภายใน 2 วินาที</p>
+<pre>// sales_agent.js
+import { GoogleGenerativeAI } from '@google/generative-ai';
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+export async function handleCustomer(msg, catalog) {
+  const prompt = `คุณคือผู้ช่วยฝ่ายขายของร้าน ข้อมูลสินค้า: ${JSON.stringify(catalog)}\nคำถามลูกค้า: ${msg}`;
+  const result = await model.generateContent(prompt);
+  return result.response.text();
+}</pre>
+
+<!-- ==================== CHAPTER 6 ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">CHAPTER 6</div>
+<h1>บทที่ 6: เทคนิคระดับว้าว (Wow-Factor Hacks)</h1>
+
+<h2>6.1 Computer Use: สั่ง AI จับเมาส์และคีย์บอร์ดทำงานแทน</h2>
+<p>
+ด้วยโมเดลอย่าง <strong>Claude 3.7 Sonnet</strong> AI สามารถมองหน้าจอคอมพิวเตอร์ ขยับเมาส์ คลิกปุ่ม และกรอกข้อมูลลงโปรแกรมต่างๆ ได้เสมือนมนุษย์จริง:
+</p>
+<ul>
+  <li><strong>กรอกภาษี e-Filing อัตโนมัติ:</strong> ให้ AI อ่านไฟล์ Excel แล้วนำตัวเลขไปกรอกลงระบบราชการทีละช่องโดยไม่งอแง</li>
+  <li><strong>ดาวน์โหลดสลิป/ใบเสร็จธนาคาร:</strong> ให้ AI ล็อกอินเข้าเว็บธนาคาร โหลด PDF ใบเสร็จทุกสิ้นเดือน และจัดแยกโฟลเดอร์ตามแผนก</li>
+  <li><strong>เชื่อมระบบเก่า (Legacy ERP):</strong> ส่องหน้าจอคัดลอกข้อมูลจากโปรแกรมบัญชีรุ่นโบราณเข้า Google Sheets Real-time</li>
+</ul>
+
+<h2>6.2 Mobile Coding 100% ผ่านสมาร์ทโฟน</h2>
+<p>
+เจ้าของธุรกิจสามารถควบคุมระบบและเขียนโค้ดได้จากทุกที่ทั่วโลก:
+</p>
+<ul>
+  <li><strong>GitHub Codespaces บนมือถือ:</strong> เปิดเบราว์เซอร์บน iPhone/Android เข้า <code>github.com/codespaces</code> จะได้ VS Code ฉบับเต็มพร้อม Agent สั่งงานด้วยคีย์บอร์ดหรือเสียง</li>
+  <li><strong>LINE / Telegram Bot Bridge:</strong> สั่งงาน Agent ผ่านแชทไลน์ เช่น <em>"สรุปยอดขายสัปดาห์นี้และปรับราคาหน้าร้านให้หน่อย"</em></li>
+  <li><strong>Voice-to-Code:</strong> กดปุ่มไมโครโฟนบนมือถือ พูดบรีฟงานภาษาไทยยาวๆ ให้ AI ร่างเว็บให้เสร็จก่อนประชุมเสร็จ</li>
+</ul>
+
+<!-- ==================== CHAPTER 7 ==================== -->
+<div class="page-break"></div>
+
+<div class="header-tag">CHAPTER 7</div>
+<h1>บทที่ 7: Deploy จริง 0 บาท & ความปลอดภัย PDPA</h1>
+
+<h2>7.1 สี่ขั้นตอนปล่อยเว็บออกสู่อินเทอร์เน็ตใน 2 นาที</h2>
+<ol>
+  <li><strong>บันทึกโค้ดเข้า GitHub:</strong> สั่ง Antigravity ว่า <em>"ช่วย Push โค้ดทั้งหมดขึ้น GitHub Repository"</em></li>
+  <li><strong>เข้าเว็บ Vercel.com:</strong> ล็อกอินด้วยบัญชี GitHub แล้วกดปุ่ม <strong>"Add New Project"</strong></li>
+  <li><strong>เลือก Repository:</strong> เลือกโปรเจกต์ของคุณ แล้วกดปุ่ม <strong>"Deploy"</strong></li>
+  <li><strong>เสร็จสิ้น:</strong> ได้ลิงก์ <code>https://your-app.vercel.app</code> พร้อมระบบความปลอดภัย SSL ฟรี 100%</li>
+</ol>
+
+<div class="callout callout-warning">
+  <div class="callout-title">🔒 กฎเหล็กความปลอดภัย & พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA 2562)</div>
+  <ul>
+    <li><strong>ห้ามใส่ข้อมูลลูกค้าจริงลงใน Prompt:</strong> ใช้ข้อมูลจำลอง (Mock data) เสมอในการพัฒนาและทดสอบ</li>
+    <li><strong>ซ่อน API Key เสมอ:</strong> บันทึกรหัสในไฟล์ <code>.env</code> และห้ามอัปโหลดขึ้น Public Repository เด็ดขาด</li>
+    <li><strong>ระบบรักษาความปลอดภัย:</strong> ใช้ระบบล็อกอินมาตรฐาน เช่น Supabase Auth หรือ Firebase Auth เพื่อเข้ารหัสรหัสผ่านลูกค้า</li>
+  </ul>
+</div>
+
+<div class="page-break"></div>
+
+<div class="header-tag">APPENDIX A</div>
+<h1>ภาคผนวก: แผนปฏิบัติการ 30 วัน (30-Day Action Plan)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ช่วงเวลา</th>
+      <th>ภารกิจที่ต้องลงมือทำ (Action Items)</th>
+      <th>ผลลัพธ์ที่คาดหวัง (Milestone)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>สัปดาห์ที่ 1</strong><br>สำรวจ Pain Point</td>
+      <td>• เลือก 1 ปัญหาที่เสียเวลามากที่สุดในบริษัท (เช่น ตอบแชท, ส่องราคา, คีย์สต็อก)<br>• รวบรวมเอกสาร SOP ป้อนเข้า Google NotebookLM</td>
+      <td>ได้โจทย์ MVP ที่ชัดเจนและคลังความรู้ Second Brain</td>
+    </tr>
+    <tr>
+      <td><strong>สัปดาห์ที่ 2</strong><br>สร้าง Prototype</td>
+      <td>• ใช้คำสั่ง <code>/grill-me</code> และ <code>/goal</code> บน Google Antigravity<br>• ปรับแต่ง Visual UI ด้วย ChatGPT Canvas</td>
+      <td>ได้ระบบต้นแบบที่ทำงานได้จริงในเครื่อง</td>
+    </tr>
+    <tr>
+      <td><strong>สัปดาห์ที่ 3</strong><br>Deploy & Test</td>
+      <td>• นำโค้ดขึ้น GitHub และ Deploy ผ่าน Vercel ฟรี<br>• ทดลองให้พนักงานและลูกค้ากลุ่มเล็กใช้งานจริง</td>
+      <td>ระบบออนไลน์ 100% พร้อมทดสอบกับงานจริง</td>
+    </tr>
+    <tr>
+      <td><strong>สัปดาห์ที่ 4</strong><br>วัดผล ROI & Scale</td>
+      <td>• ใช้ SME ROI Calculator คำนวณชั่วโมงและเงินที่ประหยัดได้<br>• เริ่มต้นขยายสู่โปรเจกต์ถัดไปในองค์กร</td>
+      <td>เกิดความคุ้มค่า เพิ่มรายได้ ลดต้นทุนอย่างแท้จริง</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin-top: 40px; text-align: center; border-top: 2px solid #0b1b3d; padding-top: 20px;">
+  <img src="file:///Users/tri333/Documents/Ebook AI Agent FastAI/public/fast-ai-logo.png" alt="Fast AI" style="height: 35px; margin-bottom: 10px;"><br>
+  <strong style="font-size: 11pt; color: #0b1b3d;">FAST AI MASTERCLASS 2026</strong><br>
+  <span style="font-size: 8.5pt; color: #64748b;">AI Agent & Vibe Coding for Thai SMEs • All Rights Reserved</span>
+</div>
+
+</body>
+</html>
