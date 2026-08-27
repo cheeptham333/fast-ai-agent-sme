@@ -14,6 +14,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import fastAiLogo from '../assets/fast-ai-logo.png';
 
 const slidesData = [
   {
@@ -25,7 +26,7 @@ const slidesData = [
     content: (
       <div className="flex flex-col items-center justify-center text-center space-y-6 py-6">
         <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-md">
-          <img src="./fast-ai-logo.png" alt="Fast AI" className="h-16 w-auto object-contain" />
+          <img src={fastAiLogo} alt="Fast AI" className="h-16 w-auto object-contain" />
         </div>
         <div className="space-y-2">
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900">
@@ -373,7 +374,7 @@ export function SlideDeckViewer() {
           </div>
 
           <div className="h-8 px-2 py-0.5 bg-white rounded-lg border border-slate-200 shadow-xs flex items-center justify-center flex-shrink-0">
-            <img src="./fast-ai-logo.png" alt="Fast AI" className="h-5 w-auto object-contain" />
+            <img src={fastAiLogo} alt="Fast AI" className="h-5 w-auto object-contain" />
           </div>
         </div>
 
