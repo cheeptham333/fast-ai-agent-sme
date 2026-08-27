@@ -14,7 +14,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import fastAiLogo from '../assets/fast-ai-logo.png';
+import FAST_AI_LOGO from '../assets/logoBase64.js';
 
 const slidesData = [
   {
@@ -26,7 +26,7 @@ const slidesData = [
     content: (
       <div className="flex flex-col items-center justify-center text-center space-y-6 py-6">
         <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-md">
-          <img src={fastAiLogo} alt="Fast AI" className="h-16 w-auto object-contain" />
+          <img src={FAST_AI_LOGO} alt="Fast AI" className="h-16 w-auto object-contain block" />
         </div>
         <div className="space-y-2">
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900">
@@ -292,7 +292,7 @@ export function SlideDeckViewer() {
       origin: { y: 0.6 }
     });
     const link = document.createElement('a');
-    link.href = '/fast_ai_masterclass_presentation.pptx';
+    link.href = './fast_ai_masterclass_presentation.pptx';
     link.download = 'Fast_AI_Masterclass_Presentation_2026.pptx';
     document.body.appendChild(link);
     link.click();
@@ -373,8 +373,9 @@ export function SlideDeckViewer() {
             </p>
           </div>
 
-          <div className="h-8 px-2 py-0.5 bg-white rounded-lg border border-slate-200 shadow-xs flex items-center justify-center flex-shrink-0">
-            <img src={fastAiLogo} alt="Fast AI" className="h-5 w-auto object-contain" />
+          {/* Slide Header Logo with FAST_AI_LOGO base64 embedded */}
+          <div className="h-9 px-2 py-0.5 bg-white rounded-xl border border-slate-200 shadow-xs flex items-center justify-center flex-shrink-0 overflow-hidden">
+            <img src={FAST_AI_LOGO} alt="Fast AI Logo" className="h-6 w-auto object-contain block" />
           </div>
         </div>
 

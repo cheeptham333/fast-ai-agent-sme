@@ -12,7 +12,7 @@ import {
   Download,
   GraduationCap
 } from 'lucide-react';
-import fastAiLogo from '../assets/fast-ai-logo.png';
+import FAST_AI_LOGO from '../assets/logoBase64.js';
 
 export function Navbar({ 
   darkMode, 
@@ -34,12 +34,12 @@ export function Navbar({
           
           {/* Logo & Brand */}
           <div className="flex items-center gap-3">
-            <a href="/" className="flex items-center gap-2.5 group">
-              <div className="h-10 px-2.5 py-1 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center shadow-xs">
+            <a href="./" className="flex items-center gap-2.5 group">
+              <div className="h-10 px-2 py-0.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center shadow-xs overflow-hidden">
                 <img 
-                  src={fastAiLogo} 
+                  src={FAST_AI_LOGO} 
                   alt="Fast AI Logo" 
-                  className="h-7 w-auto object-contain"
+                  className="h-8 w-auto object-contain block"
                 />
               </div>
               <div className="hidden sm:block">
